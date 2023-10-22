@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flying Text Animation Effect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        section{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background-color: #130e23;
+        }
+        section .text{
+            position: relative;
+            text-align: center;
+            color: #00cefe;
+            max-width: 650px;
+        }
+        section .text span{
+            position: relative;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque porro rerum blanditiis autem
+            quasi accusamus corrupti, ipsa doloribus maxime esse atque corporis, nulla magni voluptate tempore unde
+            facere obcaecati! Non eum eaque sit optio culpa totam quidem fugiat quis libero debitis adipisci rem placeat
+            quibusdam temporibus nulla iure quasi delectus, similique vel distinctio qui ab sunt aspernatur? Rem ratione
+            dolorum neque corporis obcaecati consequuntur suscipit quas quis, magni tempore. Id!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id architecto quo ullam nihil animi nisi sequi ipsa
+            ratione ipsam perferendis sit vero facere explicabo assumenda at dolores dolore voluptas quos corrupti aut
+            unde molestiae, magni itaque. Earum sed debitis magnam, sapiente laboriosam labore saepe recusandae officiis
+            sint perferendis ex fugit, aperiam maiores omnis temporibus praesentium, molestiae quam consequatur
+            inventore doloremque deleniti. Necessitatibus sunt consectetur consequatur fugiat sapiente. Repellat,
+            nesciunt amet.
+        </p>
+    </section>
+    <script src="./anime.min.js"></script>
+    <script>
+        const text = document.querySelector('.text');
+        text.innerHTML = text.textContent.replace(/\S/g , "<span>$&</span>");
+
+        const animation = anime.timeline({
+            targets : '.text span',
+            easing : "easeInOutExpo",
+            loop : true,
+        })
+
+        animation.add({
+            rotate : function(){
+                return anime.random(-360 , 360)
+            },
+            translateX : function(){
+                return anime.random(-500,500)
+            },
+            translateY: function(){
+                return anime.random(-500 , 500)
+            },
+            duration : 5000,
+            delay : anime.stagger(20)
+        })
+
+        .add({
+            rotate: 0,
+            translateX : 0,
+            translateY: 0,
+            duration : 5000,
+            delay : anime.stagger(20)
+        })
+    </script>
+</body>
+
+</html>
